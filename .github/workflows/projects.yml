@@ -31,28 +31,22 @@ jobs:
             '
 
       - name: new-item-to-project
-        uses: actions/github-script@v5
+
         env:
-          contentId: ${{ github.event.issue.node_id }}
-          projectId: "PN_kwHOACdIos4AAZ_F"
-        with:
-          github-token: ${{ SECRETS.GH_PAT }}
-          script: |
-            const query = `mutation($projectId:String!, $contentId:String!) {
-              addProjectNextItem(
-                input: {
-                  projectId: $projectId
-                  contentId: $contentId
-                }
-              ) {
-                projectNextItem {
-                  id
-                }
+          CONTENT_ID: ${{ github.event.issue.node_id }}
+          PROJECT_ID: "PN_kwHOACdIos4AAZ_F"
+          GITHUB_TOKEN: ${{ SECRETS.GH_PAT }}
+        run: |
+          gh api graphql -f query='mutation($projectId:String!, $contentId:String!) {
+            addProjectNextItem(
+              input: {
+                projectId: $projectId
+                contentId: $contentId
               }
-            }`;
+            ) {
+              projectNextItem {
+                id
+              }
+            }
+          }' -f projectId=$PROJECT_ID -f contentId=$CONTENT_ID
 
-            const {contentId, projectId} = process.env;
-            const result = await github.graphql(query, {contentId, projectId});
-            console.log(result);
-
-            
