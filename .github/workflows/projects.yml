@@ -20,8 +20,8 @@ jobs:
             const query = `mutation {
               addProjectNextItem(
                 input: {
-                  projectId: PROJECT_ID
-                  contentId: ISSUE_ID
+                  projectId: ${PROJECT_ID}
+                  contentId: ${ISSUE_ID}
                 }
               )
             }`;
