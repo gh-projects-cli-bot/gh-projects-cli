@@ -1,0 +1,25 @@
+name: "Project orchestration"
+
+on:
+  issues:
+  pull_request:
+
+jobs:
+  copy-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: new-item-to-project
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const PROJECT_ID="PN_kwHOACdIos4AAZ_F"
+            const query = `mutation {
+              addProjectNextItem(
+                input: {
+                  projectId: PROJECT_ID
+                  contentId: context.issue.node_id
+                }
+              )
+            }`;
+
