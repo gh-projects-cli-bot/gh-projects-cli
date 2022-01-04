@@ -29,7 +29,7 @@ jobs:
               }
             }`;
 
-            const {issueId, projectId} = process.env;
-            const result = await github.graphql(query, {issueId, projectId});
+            const {contentId, projectId} = process.env;
+            const result = await github.graphql(query, {contentId, projectId});
             console.log(result);
 
