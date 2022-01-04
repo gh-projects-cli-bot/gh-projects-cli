@@ -18,9 +18,9 @@ jobs:
               addProjectNextItem(
                 input: {
                   projectId: PROJECT_ID
-                  contentId: context.issue.node_id
+                  contentId: context.issue.id
                 }
               )
             }`;
-            console.log(context.issue.id);
+            console.log(context.issue);
 
