@@ -12,18 +12,20 @@ jobs:
       - name: new-item-to-project
         uses: actions/github-script@v5
         env:
-          ISSUE_ID: ${{ github.event.issue.node_id }}
+          issueId: ${{ github.event.issue.node_id }}
+          projectId: "PN_kwHOACdIos4AAZ_F";
         with:
           script: |
-            const PROJECT_ID="PN_kwHOACdIos4AAZ_F";
-            const ISSUE_ID = process.env.ISSUE_ID;
-            const query = `mutation {
+            const query = `mutation($projectId:String!, $contentId:String!) {
               addProjectNextItem(
                 input: {
-                  projectId: ${PROJECT_ID}
-                  contentId: ${ISSUE_ID}
+                  projectId: $projectId
+                  contentId: $contentId
                 }
               )
             }`;
-            console.log(ISSUE_ID);
+
+            const {issueId, projectId} = process.env;
+            const result = await github.graphql(query, {issueId, projectId});
+            console.log(result);
 
