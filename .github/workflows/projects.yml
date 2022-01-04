@@ -34,7 +34,7 @@ jobs:
 
         env:
           CONTENT_ID: ${{ github.event.issue.node_id }}
-          PROJECT_ID: "PN_kwHOACdIos4AAZ_F"
+          PROJECT_ID: "PN_kwHOBck3rc4AAaKD"
           GITHUB_TOKEN: ${{ SECRETS.GH_PAT }}
         run: |
           gh api graphql -f query='mutation($projectId:String!, $contentId:String!) {
