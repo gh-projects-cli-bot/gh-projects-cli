@@ -22,4 +22,5 @@ jobs:
                 }
               )
             }`;
+            console.log(context.issue.node_id);
 
