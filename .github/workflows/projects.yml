@@ -22,5 +22,5 @@ jobs:
                 }
               )
             }`;
-            console.log(context.issue.node_id);
+            console.log(context.issue.id);
 
