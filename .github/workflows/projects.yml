@@ -10,6 +10,8 @@ jobs:
     steps:
       
       - name: sanity-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           gh api graphql -f query='
             {
