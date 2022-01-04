@@ -13,7 +13,7 @@ jobs:
         uses: actions/github-script@v5
         env:
           contentId: ${{ github.event.issue.node_id }}
-          projectId: "PN_kwHOBck3rc4AAaKD"
+          projectId: "PN_kwHOACdIos4AAZ_F"
         with:
           github-token: ${{ SECRETS.GH_PAT }}
           script: |
