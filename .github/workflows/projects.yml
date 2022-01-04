@@ -11,16 +11,19 @@ jobs:
       
       - name: new-item-to-project
         uses: actions/github-script@v5
+        env:
+          ISSUE_ID: {{ event.issue.node_id }}
         with:
           script: |
-            const PROJECT_ID="PN_kwHOACdIos4AAZ_F"
+            const PROJECT_ID="PN_kwHOACdIos4AAZ_F";
+            const ISSUE_ID = process.env.ISSUE_ID;
             const query = `mutation {
               addProjectNextItem(
                 input: {
                   projectId: PROJECT_ID
-                  contentId: context.issue.id
+                  contentId: ISSUE_ID
                 }
               )
             }`;
-            console.log(context.issue);
+            console.log(ISSUE_ID);
 
