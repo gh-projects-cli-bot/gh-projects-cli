@@ -12,7 +12,7 @@ jobs:
       - name: new-item-to-project
         uses: actions/github-script@v5
         env:
-          ISSUE_ID: ${{ event.issue.node_id }}
+          ISSUE_ID: ${{ github.event.issue.node_id }}
         with:
           script: |
             const PROJECT_ID="PN_kwHOACdIos4AAZ_F";
