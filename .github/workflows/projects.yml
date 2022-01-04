@@ -15,7 +15,7 @@ jobs:
         run: |
           gh api graphql -f query='
             {
-              user(login: "gh-projects-cli-bot") {
+              user(login: "machow") {
                 projectsUrl
                 projectsNext(first: 10) {
                   nodes {
@@ -34,7 +34,7 @@ jobs:
 
         env:
           CONTENT_ID: ${{ github.event.issue.node_id }}
-          PROJECT_ID: "PN_kwHOBck3rc4AAaKD"
+          PROJECT_ID: "PN_kwHOACdIos4AAZ_F"
           GITHUB_TOKEN: ${{ SECRETS.GH_PAT }}
         run: |
           gh api graphql -f query='mutation($projectId:String!, $contentId:String!) {
