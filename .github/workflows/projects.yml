@@ -9,6 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
+      - name: sanity-check
+        run: |
+          gh api graphql -f query='
+            {
+              user(login: "gh-projects-cli-bot") {
+                projectsUrl
+                projectsNext(first: 10) {
+                  nodes {
+                    id
+                    title
+                  }
+                }
+                projectNext(number: 2) {
+                  id
+                }
+              }
+            }
+            '
+
       - name: new-item-to-project
         uses: actions/github-script@v5
         env:
@@ -34,22 +53,4 @@ jobs:
             const result = await github.graphql(query, {contentId, projectId});
             console.log(result);
 
-      - name: sanity-check
-        run: |
-          gh api graphql -f query='
-            {
-              user(login: "gh-projects-cli-bot") {
-                projectsUrl
-                projectsNext(first: 10) {
-                  nodes {
-                    id
-                    title
-                  }
-                }
-                projectNext(number: 2) {
-                  id
-                }
-              }
-            }
-            '
             
