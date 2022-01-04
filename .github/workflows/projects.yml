@@ -15,7 +15,6 @@ jobs:
           contentId: ${{ github.event.issue.node_id }}
           projectId: "PN_kwHOACdIos4AAZ_F"
         with:
-          github-token: ${{ SECRETS.GH_PAT }}
           script: |
             const query = `mutation($projectId:String!, $contentId:String!) {
               addProjectNextItem(
