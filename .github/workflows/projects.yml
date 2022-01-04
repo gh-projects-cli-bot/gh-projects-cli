@@ -22,7 +22,11 @@ jobs:
                   projectId: $projectId
                   contentId: $contentId
                 }
-              )
+              ) {
+                projectNextItem {
+                  id
+                }
+              }
             }`;
 
             const {issueId, projectId} = process.env;
