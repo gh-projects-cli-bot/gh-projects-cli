@@ -1,10 +1,14 @@
 import jq
 
+from dotenv import load_dotenv
 from gh_projects import (
     update_project_with_repo_issues,
     fetch_all_issues,
     push_issues_to_project_next,
 )
+
+
+load_dotenv()
 
 SIUBA_PROJECT_ID = "PN_kwHOACdIos4AAYbQ"
 
