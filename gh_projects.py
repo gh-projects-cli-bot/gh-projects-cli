@@ -142,7 +142,7 @@ def push_issues_to_project_next(project_id: str, issues: list[str]):
     """
 
     q = """
-    mutation($projectId:String!, $contentId:String!) {
+    mutation($projectId:ID!, $contentId:ID!) {
       addProjectNextItem(
         input: {
           projectId: $projectId
@@ -184,8 +184,8 @@ def _generate_field_mutation(n_fields):
       }}
     """
 
-    field_args = [f"field{ii}:String" for ii in range(n_fields)]
-    value_args = [f"value{ii}:String" for ii in range(n_fields)]
+    field_args = [f"field{ii}:ID" for ii in range(n_fields)]
+    value_args = [f"value{ii}:String!" for ii in range(n_fields)]
 
     arg_names = [f"${x}" for x in [*field_args, *value_args]]
     signature_args = ", ".join(arg_names)
@@ -200,7 +200,7 @@ def update_project_item_fields(project_id, content_id, fields: dict):
     sig_pars, actions = _generate_field_mutation(len(fields))
 
     q = (
-        "mutation($projectId:String!, $contentId:String!, "
+        "mutation($projectId:ID!, $contentId:ID!, "
         + sig_pars
         + ") {\n"
         + actions
@@ -211,7 +211,8 @@ def update_project_item_fields(project_id, content_id, fields: dict):
 
     all_field_args = {}
     for ii, (k, v) in enumerate(fields.items()):
-        all_field_args.update({f"field{ii}": k, f"value{ii}": v})
+        v_or_empty = v if v is not None else ""
+        all_field_args.update({f"field{ii}": k, f"value{ii}": v_or_empty})
 
     res = gh.query(q, projectId=project_id, contentId=content_id, **all_field_args)
 
